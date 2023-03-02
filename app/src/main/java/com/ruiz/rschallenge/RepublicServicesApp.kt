@@ -1,7 +1,7 @@
 package com.ruiz.rschallenge
 
 import android.app.Application
-import com.ruiz.rschallenge.di.rsModule
+import com.ruiz.drivers_and_routes.di.rsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
