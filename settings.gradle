@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "RS challenge"
 include ':app'
+include ':drivers-and-routes'
+include ':drivers-and-routes:data'
+include ':drivers-and-routes:domain'
+include ':drivers-and-routes:ui'
