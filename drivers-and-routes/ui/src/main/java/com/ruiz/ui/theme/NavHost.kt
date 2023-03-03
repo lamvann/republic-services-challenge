@@ -14,12 +14,13 @@ import com.ruiz.ui.theme.NavRoutes.ROUTE_SCREEN
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun FractalNavHost(
+fun NavHost(
     navController: NavHostController = rememberNavController(),
     startDestination: String = HOME,
     viewModel: RepublicServicesViewModel = getViewModel()
 ) {
-    val uiState = viewModel.uiStateLiveData.observeAsState().value!!
+    val uiState =
+        viewModel.uiStateLiveData.observeAsState().value ?: error("UiState cannot be null")
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable(HOME) {
@@ -28,7 +29,8 @@ fun FractalNavHost(
                 onNavigateToRoute = { driver ->
                     navController.navigate(ROUTE_SCREEN)
                     viewModel.fetchRoutesForDriver(driver)
-                }
+                },
+                onSortAscending = viewModel::onSortDrivers
             )
         }
         composable(ROUTE_SCREEN) {

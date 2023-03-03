@@ -6,7 +6,7 @@ import com.ruiz.domain.entity.Driver
 import com.ruiz.domain.entity.Route
 import com.ruiz.domain.entity.DriversAndRoutes
 
-class DriversAndRoutesMapper : Mapper<DriversAndRoutesResponse, DriversAndRoutes>() {
+class DriversAndRoutesRemoteMapper : Mapper<DriversAndRoutesResponse, DriversAndRoutes>() {
     override fun invoke(from: DriversAndRoutesResponse): DriversAndRoutes {
         return DriversAndRoutes(
             drivers = from.drivers.map {

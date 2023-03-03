@@ -11,23 +11,6 @@ class FilterRouteByDriver :
     )
 
     override fun invoke(args: FilterRouteByDriverParams): List<Route> {
-
-//        val routeList = mutableListOf<Route>()
-//        val idsMatch = args.routes.filter { it.id == args.chosenDriver.id.toInt() }
-//        if (idsMatch.isNotEmpty()) routeList.addAll(idsMatch)
-//        if (args.chosenDriver.id.toInt() % 2 == 0)
-//            routeList.addAll(
-//                listOf(args.routes.first { it.type == "R" })
-//            )
-//        if (args.chosenDriver.id.toInt() % 5 == 0)
-//            routeList.add(
-//                args.routes.filter { it.type == "C" }[1]
-//            )
-//        if (routeList.isEmpty())
-//            routeList.add(
-//                args.routes.last { it.type == "I" }
-//            )
-//        return routeList
         val idsMatch = args.routes.filter {
             it.id == args.chosenDriver.id.toInt()
         }

@@ -6,7 +6,5 @@ import com.ruiz.domain.repository.DriversAndRoutesRepository
 class GetDriversAndRoutes(
     private val repository: DriversAndRoutesRepository
 ): UseCase.Async<DriversAndRoutes, Unit> {
-    override suspend fun invoke(args: Unit): DriversAndRoutes {
-        return repository.fetchDriversAndRoutes()
-    }
+    override suspend fun invoke(args: Unit) = repository.fetchDriversAndRoutes()
 }

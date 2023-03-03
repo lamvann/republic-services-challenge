@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ruiz.domain.usecase.UseCase
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch
 
