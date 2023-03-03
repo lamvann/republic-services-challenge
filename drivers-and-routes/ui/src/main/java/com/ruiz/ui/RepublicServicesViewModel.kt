@@ -1,25 +1,31 @@
 package com.ruiz.ui
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
-import com.ruiz.domain.entity.DriversAndRoutes
+import com.ruiz.domain.entity.Driver
+import com.ruiz.domain.entity.Route
+import com.ruiz.domain.usecase.FilterRouteByDriver
 import com.ruiz.domain.usecase.GetDriversAndRoutes
-import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class RepublicServicesViewModel(
     app: Application,
-) : AndroidViewModel(app), KoinComponent {
+    fetchDataUseCase: GetDriversAndRoutes,
+    private val filterRoutesUseCase: FilterRouteByDriver
+) : BaseViewModel<DriversAndRoutesUiState>(app, DriversAndRoutesUiState()) {
 
-    val useCase: GetDriversAndRoutes by inject()
+    init {
+        executeUseCase(fetchDataUseCase, Unit) {
+            updateUiState { uiState.copy(
+                driversAndRoutes = it,
+                isLoading = false
+            ) }
+        }
+    }
 
-    fun fetch(onSuccess: (DriversAndRoutes) -> Unit) {
-        viewModelScope.launch {
-            onSuccess(
-                useCase(Unit)
-            )
+    fun fetchRoutesForDriver(driver: Driver) {
+        executeUseCase(filterRoutesUseCase, FilterRouteByDriver.FilterRouteByDriverParams(driver, uiState.driversAndRoutes.routes)) {
+            updateUiState { uiState.copy(
+                routeByDriver = it
+            ) }
         }
     }
 }

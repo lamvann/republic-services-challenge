@@ -3,6 +3,7 @@ package com.ruiz.drivers_and_routes.di
 import com.ruiz.data.remote.api.DriversAndRoutesAPI
 import com.ruiz.data.repository.DriversAndRoutesRepositoryImpl
 import com.ruiz.domain.repository.DriversAndRoutesRepository
+import com.ruiz.domain.usecase.FilterRouteByDriver
 import com.ruiz.domain.usecase.GetDriversAndRoutes
 import com.ruiz.ui.RepublicServicesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -13,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 val rsModule = module {
+    // Data
     single {
         Retrofit
             .Builder()
@@ -21,7 +23,12 @@ val rsModule = module {
             .build()
     }
     single { get<Retrofit>().create(DriversAndRoutesAPI::class.java) }
+
+    // Domain
     singleOf(::GetDriversAndRoutes)
+    singleOf(::FilterRouteByDriver)
     singleOf(::DriversAndRoutesRepositoryImpl) bind DriversAndRoutesRepository::class
+
+    // UI
     viewModelOf(::RepublicServicesViewModel)
 }
